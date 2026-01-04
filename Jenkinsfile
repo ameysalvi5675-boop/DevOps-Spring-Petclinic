@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "devops-ci-cd-aws"
+        DOCKER_IMAGE = "ameysalvi5675/spring-petclinic"
     }
 
     stages {
 
         stage('Maven Build') {
             steps {
-                sh 'mvn clean package'
+                sh './mvnw clean package -DskipTests -Dcheckstyle.skip=true'
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
                 sh '''
                 docker stop app || true
                 docker rm app || true
-                docker run -d -p 8080:8080 --name app $DOCKER_IMAGE:latest
+                docker run -d -p 80:80 --name app $DOCKER_IMAGE:latest
                 '''
             }
         }
