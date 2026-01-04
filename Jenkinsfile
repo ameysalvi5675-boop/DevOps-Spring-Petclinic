@@ -39,7 +39,7 @@ pipeline {
                 sh '''
                 docker stop app || true
                 docker rm app || true
-                docker run -d -p 9000:9000 --name app $DOCKER_IMAGE:latest
+                docker run -d -p 9000:8080 --name app $DOCKER_IMAGE:latest
                 '''
             }
         }
